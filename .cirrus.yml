@@ -5,7 +5,7 @@ env:
 
 
 task:
-  name: Test
+  name: Test.
   skip: $CIRRUS_BRANCH == 'main'
   only_if: $CIRRUS_REPO_OWNER == 'ROM-builders'
   timeout_in: 30m
@@ -97,7 +97,8 @@ task:
     - otazip=$(ls out/target/product/$device/*-ota-*.zip || true)
     - awaken=$(ls out/target/product/$device/Project-Awaken*.zip || true)
     - octavi=$(ls out/target/product/$device/OctaviOS-R*.zip || true)
-    - rm -rf $engzip $otazip $awaken $octavi
+    - p404=$(ls out/target/product/$device/?.*zip || true)
+    - rm -rf $engzip $otazip $awaken $octavi $p404
     - dlink=$(basename out/target/product/$device/*.zip)
     - command=$(grep 'rclone copy' $CIRRUS_WORKING_DIR/build_rom.sh)
     - bash -c "$command"
